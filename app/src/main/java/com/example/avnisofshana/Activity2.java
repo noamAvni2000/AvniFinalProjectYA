@@ -1,6 +1,7 @@
 package com.example.avnisofshana;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +10,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class Activity2 extends AppCompatActivity {
-
+    TextView tvHello;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,5 +21,10 @@ public class Activity2 extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        tvHello=findViewById(R.id.tvHello);
+        String username = getIntent().getStringExtra("USERNAME_KEY");
+        tvHello.setText("Hello " + username + "!");//making the tv show the username of the user
+
+
     }
 }

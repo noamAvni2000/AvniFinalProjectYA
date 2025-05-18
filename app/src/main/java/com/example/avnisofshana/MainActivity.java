@@ -44,11 +44,12 @@ public class MainActivity extends AppCompatActivity {
                 if(t!=null)
                 {
                     Intent intent = new Intent(MainActivity.this, Activity2.class);
+                    intent.putExtra("USERNAME_KEY", username);//saves the username of the user
                     startActivity(intent);
                     finish();
                 }//using the function from the dao to check if the user is in the database(it retuns null if not found)
                 else {
-                    Toast.makeText(MainActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "UserNamer or Password is incorrect", Toast.LENGTH_SHORT).show();
                 }//a toast to show the user their login attempt failed
             }
         });
