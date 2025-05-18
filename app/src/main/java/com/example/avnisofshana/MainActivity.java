@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,15 +34,22 @@ public class MainActivity extends AppCompatActivity {
 
         UsersDatabase db= UsersDatabase.getInstance(this);
         TavlaDao tavlaDao=db.tavlaDao();
-        Tavla t=new Tavla();//here i am creating a tavla object
 
-        //note to self on how to solve!!!! i think i need to do a for loop that checks if when id=i the username in database equals to username in
-        //edit text&& in the same id the password in database equals to password in edit text
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                startActivity(intent);
+                String username=etUsername.getText().toString().trim();
+                String password=etPassword.getText().toString().trim();//getting the text from the user(trim removes unnecessary spaces)
+                Tavla t=tavlaDao.login(username,password);
+                if(t!=null)
+                {
+                    Intent intent = new Intent(MainActivity.this, Activity2.class);
+                    startActivity(intent);
+                    finish();
+                }//using the function from the dao to check if the user is in the database(it retuns null if not found)
+                else {
+                    Toast.makeText(MainActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                }//a toast to show the user their login attempt failed
             }
         });
     }

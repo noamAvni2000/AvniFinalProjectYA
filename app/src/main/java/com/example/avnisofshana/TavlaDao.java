@@ -19,6 +19,9 @@ public interface TavlaDao {
     @Delete
     void delete (Tavla t);
 
+    @Query("SELECT * FROM tavla WHERE username = :username AND password = :password")
+    Tavla login(String username, String password);
+
     @Query("SELECT*FROM tavla")
     List<Tavla>getAllInfo();
 
