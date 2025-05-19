@@ -22,6 +22,7 @@ public class Activity2 extends AppCompatActivity {
     ArrayList<Question> questions;
     int currentIdx  = 0;//will hold which Question were showing right now
     int correctSoFar = 0;//will hold running score
+    int questionsAnswered = 0;//will hold the number of questions answered
     private ArrayList<Question> populateQuestions(int numberOfQuestionsToCreate) {
         int minValue = 0;
         int maxValue = 99;
@@ -47,6 +48,7 @@ public class Activity2 extends AppCompatActivity {
             correctSoFar++;
         }
 
+        questionsAnswered++;//ups the number of questions answered by 1 after the question was answered
         currentIdx = (currentIdx + 1) % questions.size();
         makeCurrentQuestion();//moves to the next question
     }//i made this so instead of writing this code in everypart i can just call this function
@@ -104,8 +106,9 @@ public class Activity2 extends AppCompatActivity {
                         .setMessage("This will save your score and show your stats Continue?")
                         .setPositiveButton("OK", (dialog, which) -> {
                             Intent i = new Intent(Activity2.this, Activity3.class);
-                            i.putExtra("score",  correctSoFar);
-                            i.putExtra("total",  questions.size());
+                            i.putExtra("score",  correctSoFar);//makes sure the score travels to the next screen
+                            i.putExtra("total",  questionsAnswered);//makes sure the total travels to the next screen
+                            i.putExtra("USERNAME_KEY", getIntent().getStringExtra("USERNAME_KEY"));//the thing that makes sure the username doesnt get lost when switching screens
                             startActivity(i);//saves the score and shows the users stats
 
                             correctSoFar = 0;
