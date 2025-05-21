@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 public class Activity3 extends AppCompatActivity {
 
+    static ArrayList<String> scoreHistory = new ArrayList<>();//the static keeps the score history from being lost when switching screens
     Button btnBackToQuestions;
     ArrayList<String> arrList;
     ArrayAdapter<String> arrAdapt;
@@ -37,17 +38,18 @@ public class Activity3 extends AppCompatActivity {
         username = intent.getStringExtra("USERNAME_KEY");
         btnBackToQuestions=findViewById(R.id.btnBackToQuestions);
         lv=findViewById(R.id.lv);
-        arrList = new ArrayList<>();
-        arrAdapt = new ArrayAdapter<>(Activity3.this, android.R.layout.simple_list_item_1, arrList);
+        arrAdapt = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, scoreHistory);
         lv.setAdapter(arrAdapt);//setting the adapter to the list view
 
         int score  = intent.getIntExtra("score",  0);
         int total  = intent.getIntExtra("total",  1);
-        double percent = (score * 100.0) / total;
-
-        String line = (username+"–"+(int)percent+"%-great score!");
-        arrList.add(line);//adding the score to the list view
-        arrAdapt.notifyDataSetChanged();//notifying the adapter that the list has changed
+        double percent = (score / (double) total) * 100;
+        int roundedPercent = (int) Math.round(percent);
+        if (scoreHistory.size() >= 10) {
+            scoreHistory.remove(0);//keep only last 10 scores
+        }
+        scoreHistory.add(username + " - " + roundedPercent + "% - great score!");
+        arrAdapt.notifyDataSetChanged();
 
         btnBackToQuestions.setOnClickListener(new View.OnClickListener() {
             @Override

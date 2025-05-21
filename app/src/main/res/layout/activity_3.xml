@@ -9,8 +9,8 @@
 
     <ListView
         android:id="@+id/lv"
-        android:layout_width="409dp"
-        android:layout_height="454dp"
+        android:layout_width="413dp"
+        android:layout_height="647dp"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

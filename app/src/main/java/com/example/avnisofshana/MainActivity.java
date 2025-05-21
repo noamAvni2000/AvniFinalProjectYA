@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 }//using the function from the dao to check if the user is in the database(it retuns null if not found)
                 else {
-                    Toast.makeText(MainActivity.this, "UserNamer or Password is incorrect", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "UserName or Password is incorrect", Toast.LENGTH_SHORT).show();
                 }//a toast to show the user their login attempt failed
             }
         });
