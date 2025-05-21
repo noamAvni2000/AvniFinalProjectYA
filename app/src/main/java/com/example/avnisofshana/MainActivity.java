@@ -34,6 +34,18 @@ public class MainActivity extends AppCompatActivity {
 
         UsersDatabase db= UsersDatabase.getInstance(this);
         TavlaDao tavlaDao=db.tavlaDao();
+        Tavla t=new Tavla();
+        t.setUsername("noam");
+        t.setPassword("123");
+        tavlaDao.insert(t);
+        t=new Tavla();
+        t.setUsername("uri");
+        t.setPassword("abc");
+        tavlaDao.insert(t);
+        t=new Tavla();
+        t.setUsername("oren");
+        t.setPassword("456");
+        tavlaDao.insert(t);//here i am inserting the users into the database
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
